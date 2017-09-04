@@ -13,6 +13,7 @@ Using that data, web apps can determine if the user is using their phone while
 - driving
 - taking a picture
 - lying in bed
+- laying the phone on a table
 
 and probably more, including guesses if the user is actively using their phone at this moment, or even if they're impaired by alcohol.
 
