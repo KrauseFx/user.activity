@@ -30,6 +30,8 @@ All source code can be found in a single file: [index.html](https://github.com/K
 
 This project was by no means designed to be used to track the user, but instead make people aware of how easy it is to use that data, and get Apple to add a permission prompt of acceleration sensors for websites and mobile apps.
 
+You can dupe the radar [rdar://34234813](https://openradar.appspot.com/34234813) 👍
+
 ## License
 
 This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE) file.
