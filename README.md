@@ -18,7 +18,7 @@ and probably more, including guesses if the user is actively using their phone a
 
 ## This project
 
-This was a Sunday night hack project, where I wanted to see how easy it is to guess what the user is doing based on the data, without using any JS libraries, artificial intelligence or even any kind of pattern recognition.
+This was a 1h Sunday night hack project, where I wanted to see how easy it is to guess what the user is doing based on the data, without using any JS libraries, artificial intelligence or even any kind of pattern recognition.
 
 **[Open the web-app on your mobile device](https://krausefx.github.io/whats-the-user-doing/)**
 
@@ -31,6 +31,10 @@ All source code can be found in a single file: [index.html](https://github.com/K
 This project was by no means designed to be used to track the user, but instead make people aware of how easy it is to use that data, and get Apple to add a permission prompt of acceleration sensors for websites and mobile apps.
 
 You can dupe the radar [rdar://34234813](https://openradar.appspot.com/34234813) 👍
+
+Evil companies can afford to spend more resources on writing an excellent detection algorithm to (ab)use the sensor data to detect what the user is doing without getting their permission.
+
+On the other hand, this could be used for positive things also, imagine a (web)app not showing a certain popup because it notices that you're busy driving a car or walking on a street.
 
 ## License
 
