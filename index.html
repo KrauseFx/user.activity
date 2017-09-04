@@ -1,0 +1,37 @@
+<h1>What's the user doing?</h1>
+
+<h3>Motion</h3>
+<p>X: <span id="motionX">0</span></p>
+<p>Y: <span id="motionY">0</span></p>
+<p>Z: <span id="motionZ">0</span></p>
+
+<h3>Orientation</h3>
+<p>X: <span id="orientationX">0</span></p>
+<p>Y: <span id="orientationY">0</span></p>
+<p>Z: <span id="orientationZ">0</span></p>
+
+<script type="text/javascript">
+  if (window.DeviceMotionEvent) {
+    window.addEventListener("devicemotion", motion, false);
+  } else {
+    console.log("DeviceMotionEvent is not supported");
+  }
+
+  function motion(event) {
+    document.getElementById("motionX").textContent = Math.round(event.accelerationIncludingGravity.x)
+    document.getElementById("motionY").textContent = Math.round(event.accelerationIncludingGravity.y)
+    document.getElementById("motionZ").textContent = Math.round(event.accelerationIncludingGravity.z)
+  }
+
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener("deviceorientation", orientation, false);
+  } else {
+    console.log("DeviceOrientationEvent is not supported");
+  }
+
+  function orientation(event) {
+    document.getElementById("orientationX").textContent = Math.round(event.alpha)
+    document.getElementById("orientationY").textContent = Math.round(event.beta)
+    document.getElementById("orientationZ").textContent = Math.round(event.gamma)
+  }
+</script>
