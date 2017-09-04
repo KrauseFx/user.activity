@@ -6,10 +6,10 @@
     <meta name="author" content="Felix Krause">
     <meta charset="UTF-8">
   </head>
-  <body>
+  <body id="body">
     <h1>What's the user doing?</h1>
 
-    <h4>Chances are, you are</h4>
+    <h4 id="chances">Chances are, you are</h4>
     <div id="result">
     </div>
 
@@ -35,7 +35,12 @@
   if (!Array.prototype.last) {
     Array.prototype.last = function() {
       return this[this.length - 1];
-  };
+  }
+
+  // Artifical loading for a bit to make sure the gyro loads the data first
+  setTimeout(function() {
+    document.getElementById("body").style.display = 'block'
+  }, 500)
 
   var historicMotion = {
     "x": [],
@@ -99,44 +104,38 @@
       return totalSum * 100 / numberOfHistoricPoints
     }
     return 0 // not enough data yet
-  }
+  }  
 
 
-  setInterval(updateStatus, 100)
-  updateStatus()
-
-
-  // Tracking
-  if (window.DeviceMotionEvent) {
+  var isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android)/); 
+  if (isMobile != null) {
     window.addEventListener("devicemotion", motion, false);
-  } else {
-    console.log("DeviceMotionEvent is not supported");
-  }
 
-  function motion(event) {
-    document.getElementById("motionX").textContent = (mostRecentMovement(historicMotion["x"], 150, false)).toFixed(2)
-    document.getElementById("motionY").textContent = (mostRecentMovement(historicMotion["y"], 150, false)).toFixed(2)
-    document.getElementById("motionZ").textContent = (mostRecentMovement(historicMotion["z"], 150, false)).toFixed(2)
+    function motion(event) {
+      document.getElementById("motionX").textContent = (mostRecentMovement(historicMotion["x"], 150, false)).toFixed(2)
+      document.getElementById("motionY").textContent = (mostRecentMovement(historicMotion["y"], 150, false)).toFixed(2)
+      document.getElementById("motionZ").textContent = (mostRecentMovement(historicMotion["z"], 150, false)).toFixed(2)
 
-    historicMotion["x"].push(event.acceleration.x)
-    historicMotion["y"].push(event.acceleration.y)
-    historicMotion["z"].push(event.acceleration.z)
-  }
+      historicMotion["x"].push(event.acceleration.x)
+      historicMotion["y"].push(event.acceleration.y)
+      historicMotion["z"].push(event.acceleration.z)
+    }
 
-  if (window.DeviceOrientationEvent) {
     window.addEventListener("deviceorientation", orientation, false);
+
+    function orientation(event) {
+      document.getElementById("orientationX").textContent = Math.round(event.alpha)
+      document.getElementById("orientationY").textContent = Math.round(event.beta)
+      document.getElementById("orientationZ").textContent = Math.round(event.gamma)
+
+      historicOrientation["x"].push(event.alpha)
+      historicOrientation["y"].push(event.beta)
+      historicOrientation["z"].push(event.gamma)
+    }
+    setInterval(updateStatus, 100)
   } else {
-    console.log("DeviceOrientationEvent is not supported");
-  }
-
-  function orientation(event) {
-    document.getElementById("orientationX").textContent = Math.round(event.alpha)
-    document.getElementById("orientationY").textContent = Math.round(event.beta)
-    document.getElementById("orientationZ").textContent = Math.round(event.gamma)
-
-    historicOrientation["x"].push(event.alpha)
-    historicOrientation["y"].push(event.beta)
-    historicOrientation["z"].push(event.gamma)
+    setStatus("Please open this site on your smartphone")
+    document.getElementById("chances").style.display = 'none';
   }
 };
 </script>
@@ -163,6 +162,10 @@
       height: 30px; 
       width: 100px;
       transition: all 0.1s;
+  }
+
+  #body {
+    display: none;
   }
 
   th {  
