@@ -1,23 +1,32 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width">
     <meta name="viewport" content="initial-scale=1.0">
+    <meta name="author" content="Felix Krause">
+    <meta charset="UTF-8">
   </head>
   <body>
     <h1>What's the user doing?</h1>
 
-    <p>Chances are high, you are <b><span id="userDoing"></span></b></p>
+    <h4>Chances are, you are</h4>
+    <div id="result">
+    </div>
 
     <h3>Motion</h3>
-    <p>X: <span id="motionX">0</span></p>
-    <p>Y: <span id="motionY">0</span></p>
-    <p>Z: <span id="motionZ">0</span></p>
-    <p>Overall: <span id="motionOverall">0</span></p>
+    <table>
+      <tr><td>X</td><td id="motionX">0</td></tr>
+      <tr><td>Y</td><td id="motionY">0</td></tr>
+      <tr><td>Z</td><td id="motionZ">0</td></tr>
+      <tr><td>Overall</td><td id="motionOveral">0</td></tr>
+    </table>
 
     <h3>Orientation</h3>
-    <p>X: <span id="orientationX">0</span></p>
-    <p>Y: <span id="orientationY">0</span></p>
-    <p>Z: <span id="orientationZ">0</span></p>
+    <table>
+      <tr><td>X</td><td id="orientationX">0</td></tr>
+      <tr><td>Y</td><td id="orientationY">0</td></tr>
+      <tr><td>Z</td><td id="orientationZ">0</td></tr>
+    </table>
   </body>
 </html>
 
@@ -40,22 +49,22 @@
   }
 
   function setStatus(status) {
-    document.getElementById("userDoing").textContent = status
+    document.getElementById("result").textContent = status
   }
 
   function updateStatus() {
     let movement = mostRecentMovementOverall(75)
-    document.getElementById("motionOverall").textContent = Math.round(movement * 100) / 100
+    document.getElementById("motionOveral").textContent = movement.toFixed(2)
 
-    if (mostRecentMovementOverall(1000) > 60) { // TODO: haven't tested this, 1,000 so it's a longer time
+    if (mostRecentMovementOverall(4000) > 60) { // TODO: haven't tested this, 1,000 so it's a longer time
       setStatus("driving")
     } else if (historicOrientation["z"].last() > 70 || historicOrientation["z"].last() < -70) {
-      setStatus("lying in bed sideways")
+      setStatus("lying in bed sideways, or taking a landscape picture")
     } else if (historicOrientation["y"].last() > 160 || historicOrientation["y"].last() < -160) {
       setStatus("lying on your back, with your phone up")
     } else if (historicOrientation["y"].last() >= 30 && historicOrientation["y"].last() < 70) {
       if (movement > 18) {
-        setStatus("using your phone while walking or driving")
+        setStatus("using your phone while walking")
       } else {
         setStatus("using your phone, sitting or standing")
       }
@@ -63,6 +72,8 @@
       setStatus("taking a picture")
     } else if (historicOrientation["y"].last() >= 95 && historicOrientation["y"].last() < 120) {
       setStatus("taking a selfie")
+    } else if (Math.round(historicOrientation["z"].last()) == 0 && Math.round(historicOrientation["y"].last()) == 0) {
+      setStatus("using the phone on a table")
     } else {
       setStatus("using your phone")
     }
@@ -103,9 +114,9 @@
   }
 
   function motion(event) {
-    document.getElementById("motionX").textContent = Math.round(mostRecentMovement(historicMotion["x"], 150, false) * 100) / 100
-    document.getElementById("motionY").textContent = Math.round(mostRecentMovement(historicMotion["y"], 150, false) * 100) / 100
-    document.getElementById("motionZ").textContent = Math.round(mostRecentMovement(historicMotion["z"], 150, false) * 100) / 100
+    document.getElementById("motionX").textContent = (mostRecentMovement(historicMotion["x"], 150, false)).toFixed(2)
+    document.getElementById("motionY").textContent = (mostRecentMovement(historicMotion["y"], 150, false)).toFixed(2)
+    document.getElementById("motionZ").textContent = (mostRecentMovement(historicMotion["z"], 150, false)).toFixed(2)
 
     historicMotion["x"].push(event.acceleration.x)
     historicMotion["y"].push(event.acceleration.y)
@@ -129,3 +140,38 @@
   }
 };
 </script>
+
+<style type="text/css">
+  body {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+  }
+  #result {
+    background-color: #63A030;
+    padding: 20px;
+    color: white;
+    font-weight: bold;
+  }
+  table {  
+    color: #333;
+    border-collapse: 
+    collapse; border-spacing: 0; 
+  }
+
+  td, th {  
+      border: 1px solid transparent;
+      height: 30px; 
+      width: 100px;
+      transition: all 0.1s;
+  }
+
+  th {  
+      background: #DFDFDF;
+      font-weight: bold;
+  }
+
+  td {  
+      background: #FAFAFA;
+      text-align: center;
+  }
+</style>
