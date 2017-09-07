@@ -27,6 +27,9 @@
       <tr><td>Y</td><td id="orientationY">0</td></tr>
       <tr><td>Z</td><td id="orientationZ">0</td></tr>
     </table>
+
+    <p class="footer">Proof of concept only, <a href="https://github.com/KrauseFx/whats-the-user-doing" target="_blank">more information about this project</a></p>
+    <p class="footer">Built by <a href="https://twitter.com/KrauseFx" target="_blank">@KrauseFx</a></p>
   </body>
 </html>
 
@@ -63,8 +66,8 @@
 
     // Below some stupid, very basic code to guess what the user is doing
     // As described in the README, this is just a proof of concept
-    if (mostRecentMovementOverall(4000) > 60) { // TODO: haven't tested this, 1,000 so it's a longer time
-      setStatus("driving")
+    if (mostRecentMovementOverall(4000) > 40) { // TODO: haven't tested this, 1,000 so it's a longer time
+      setStatus("driving or other form of transportation")
     } else if (historicOrientation["z"].last() > 70 || historicOrientation["z"].last() < -70) {
       setStatus("lying in bed sideways, or taking a landscape picture")
     } else if (historicOrientation["y"].last() > 160 || historicOrientation["y"].last() < -160) {
@@ -186,5 +189,12 @@
   td {  
       background: #FAFAFA;
       text-align: center;
+  }
+
+  .footer {
+    color: #777;
+  }
+  .footer > a {
+    color: #449;
   }
 </style>
