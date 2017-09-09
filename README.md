@@ -1,5 +1,9 @@
 # What's the user doing
 
+[![Twitter: @KrauseFx](https://img.shields.io/badge/contact-@KrauseFx-blue.svg?style=flat)](https://twitter.com/KrauseFx)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/KrauseFx/whats-the-user-doing/blob/master/LICENSE)
+
+
 Modern web browsers give the user more control over what data they're sharing with websites, for example location services and access to the camera.
 
 However I recently noticed a gap of how websites can determine the activity of the user based on the acceleration and gyro sensor built into modern smartphones, including the iPhone and Google Pixel.
