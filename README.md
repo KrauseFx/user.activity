@@ -17,7 +17,7 @@ Modern web browsers give the user more control over what data they're sharing wi
 
 However I recently noticed a gap of how websites can determine the activity of the user based on the acceleration and gyro sensor built into modern smartphones, including the iPhone and Android phones.
 
-Using that data, web apps can determine if the user is using their phone while
+Using that data, any website can determine if the user is using their phone while
 
 - sitting
 - standing
