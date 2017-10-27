@@ -12,6 +12,7 @@
     <h5 id="chances">Chances are, you are</h5>
     <div id="result">
     </div>
+    <img id="qr" src="assets/qr-code.png">
 
     <h4>Motion</h4>
     <table>
@@ -148,6 +149,7 @@
     setInterval(updateStatus, 100)
   } else {
     setStatus("Please open this site on your smartphone")
+    document.getElementById("qr").style.display = 'block';
     document.getElementById("chances").style.display = 'none';
   }
 };
@@ -200,5 +202,9 @@
   }
   .footer > a {
     color: #449;
+  }
+
+  #qr {
+    display: none;
   }
 </style>
