@@ -35,7 +35,7 @@ and probably more, including guesses if the user is actively using their phone a
 
 This was a 1h Sunday night hack project, where I wanted to see how easy it is to guess what the user is doing based on the data, without using any JS libraries, artificial intelligence or even any kind of pattern recognition.
 
-**[Open the web-app on your mobile device](https://krausefx.github.io/whats-the-user-doing/)**
+**[Open the web-app on your mobile device](https://krausefx.github.io/user.activity)**
 
 All source code can be found in a single file: [index.html](https://github.com/KrauseFx/whats-the-user-doing/blob/master/index.html)
 
